@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback } from "react"
+import { useNavigate } from 'react-router-dom'
 import { PLANETS } from "../data/planets.js"
 import { useAnimationLoop } from "../hooks/useAnimationLoop"
 import StarField from "./StarField"
@@ -24,6 +25,7 @@ function SolarSystem() {
   const [hoveredPlanet, setHoveredPlanet] = useState<typeof PLANETS[0] | null>(null)
   const [hoveredPos, setHoveredPos] = useState({ x: 0, y: 0 })
   const mouseRef = useRef({ x: -999, y: -999 })
+  const navigate = useNavigate()
 
   function drawSun(ctx: CanvasRenderingContext2D) {
     ctx.save()
@@ -94,12 +96,12 @@ function SolarSystem() {
   }
 
   const draw = useCallback(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
+        const canvas = canvasRef.current
+        if (!canvas) return
+        const ctx = canvas.getContext("2d")
+        if (!ctx) return
 
-    ctx.clearRect(0, 0, WIDTH, HEIGHT)
+        ctx.clearRect(0, 0, WIDTH, HEIGHT)
 
     planetsState.current.forEach((p) => drawOrbit(ctx, p.orbit))
     drawSun(ctx)
@@ -139,17 +141,21 @@ function SolarSystem() {
   }
 
   function handleMouseLeave() {
-    mouseRef.current = { x: -999, y: -999 }
-    setHoveredPlanet(null)
+     mouseRef.current = { x: -999, y: -999 }
+     setHoveredPlanet(null)
   }
+  function handleClick() {
+     if (hoveredPlanet) {
+     navigate(`/planet/${hoveredPlanet.id}`)
+    }
+}
 
   return (
     <div className="solar-system">
       <h1 className="solar-system__title">Système Solaire</h1>
       <div
         className="solar-system__canvas-wrap"
-        style={{ width: WIDTH, height: HEIGHT }}
-      >
+        style={{ width: WIDTH, height: HEIGHT }}>
         <StarField width={WIDTH} height={HEIGHT} />
         <canvas
           ref={canvasRef}
@@ -157,6 +163,7 @@ function SolarSystem() {
           height={HEIGHT}
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
+          onClick={handleClick}
           style={{
             position: "absolute",
             top: 0,

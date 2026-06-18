@@ -1,0 +1,185 @@
+.planet-detail {
+  min-height: 100vh;
+  background: #05060f;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: sans-serif;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Grille de fond futuriste */
+.planet-detail::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+.planet-detail__back {
+  position: absolute;
+  top: 2rem;
+  left: 2rem;
+  background: transparent;
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 12px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  z-index: 10;
+}
+
+.planet-detail__back:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Layout deux colonnes */
+.planet-detail__layout {
+  display: flex;
+  align-items: center;
+  gap: 6rem;
+  width: 100%;
+  max-width: 1100px;
+  padding: 2rem;
+  z-index: 1;
+}
+
+/* Colonne gauche */
+.planet-detail__left {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* Colonne droite */
+.planet-detail__right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+/* Sphère — inchangée */
+.planet-detail__sphere {
+  position: relative;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background-size: 200%;
+  background-position: 0% center;
+  animation: spinTexture 8s linear infinite;
+  box-shadow: 0 0 80px rgba(255, 255, 255, 0.12);
+}
+
+.planet-detail__sphere::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at 30% 35%,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 30%,
+    rgba(0, 0, 0, 1) 100%
+  );
+}
+
+@keyframes spinTexture {
+  from { background-position: 0% center; }
+  to   { background-position: 200% center; }
+}
+
+/* Coordonnées sous la planète style HUD */
+.planet-detail__coords {
+  margin-top: 1.5rem;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.25);
+  letter-spacing: 0.15em;
+  text-align: center;
+  line-height: 1.8;
+}
+
+/* Header droite */
+.planet-detail__name {
+  font-size: 3.5rem;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  margin: 0 0 0.5rem;
+  text-transform: uppercase;
+}
+
+.planet-detail__type {
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 3px;
+  padding: 3px 10px;
+  margin-bottom: 1rem;
+  display: inline-block;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* Ligne décorative HUD */
+.planet-detail__divider {
+  width: 100%;
+  height: 0.5px;
+  background: linear-gradient(to right, rgba(255,255,255,0.3), transparent);
+  margin-bottom: 1rem;
+}
+
+.planet-detail__description {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.45);
+  margin-bottom: 2rem;
+  line-height: 1.8;
+  max-width: 500px;
+}
+
+/* Card données */
+.planet-detail__card {
+  background: rgba(8, 12, 30, 0.6);
+  border: 0.5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid rgba(255, 255, 255, 0.2);
+  border-radius: 0 8px 8px 0;
+  padding: 1rem 1.5rem;
+  width: 100%;
+}
+
+.planet-detail__row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  padding: 8px 0;
+  border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+}
+
+.planet-detail__row:last-child {
+  border-bottom: none;
+}
+
+.planet-detail__label {
+  color: rgba(255, 255, 255, 0.35);
+  letter-spacing: 0.08em;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.planet-detail__value {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+}
