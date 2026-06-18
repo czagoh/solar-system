@@ -20,7 +20,7 @@ function PlanetDetails() {
                 <div className="planet-detail__left">
                     <div
                         className="planet-detail__sphere"
-                        style={{ backgroundImage: `url(${import.meta.env.BASE_URL}textures/${planet.texture.split('/textures/')[1]})` }}
+                        style={{ backgroundImage: `url(/solar-system${planet.texture})` }}
                     />
                     <div className="planet-detail__coords">
                         <p>DIST. SOLEIL — {planet.dist}</p>
