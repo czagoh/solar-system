@@ -1,0 +1,116 @@
+.intro {
+  position: fixed;
+  inset: 0;
+  background: #05060f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: introFadeIn 1.2s ease;
+}
+
+.intro__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 1;
+  position: relative;
+  animation: introContentUp 1.5s ease;
+}
+
+.intro__sub {
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  color: rgba(255, 255, 255, 0.500);
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+
+.intro__title {
+  font-size: 4rem;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #fff;
+  margin: 0 0 1.5rem;
+}
+
+.intro__desc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.500);
+  line-height: 2;
+  margin: 0 0 3rem;
+  letter-spacing: 0.05em;
+}
+
+.intro__btn {
+  background: transparent;
+  border: 0.5px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
+  padding: 12px 40px;
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: background 0.3s, border-color 0.3s;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.intro__btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.8);
+  animation: none;
+}
+
+.intro--leaving {
+  animation: warpSpeed 0.9s ease-in forwards;
+}
+
+.intro--leaving .intro__content {
+  animation: contentFade 0.3s ease forwards;
+}
+
+@keyframes warpSpeed {
+  0%   { 
+    opacity: 1; 
+    transform: scale(1); 
+    filter: brightness(1) blur(0px);
+  }
+  20%  { 
+    opacity: 1; 
+    transform: scale(1.2); 
+    filter: brightness(1.5) blur(0px);
+  }
+  60%  { 
+    opacity: 1; 
+    transform: scale(3) perspective(500px) translateZ(100px); 
+    filter: brightness(3) blur(2px);
+  }
+  100% { 
+    opacity: 0; 
+    transform: scale(12) perspective(500px) translateZ(400px); 
+    filter: brightness(6) blur(20px);
+  }
+}
+
+@keyframes contentFade {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(0.8); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.5; }
+}
+
+@keyframes introFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes introContentUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

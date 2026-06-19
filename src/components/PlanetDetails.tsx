@@ -9,12 +9,28 @@ function PlanetDetails() {
         return <p>Planète introuvable</p>
     }
     const navigate = useNavigate()
+    const currentIndex = PLANETS.findIndex((p) => p.id === id)
+    const prevPlanet = PLANETS[currentIndex - 1] ?? PLANETS[PLANETS.length - 1]
+    const nextPlanet = PLANETS[currentIndex + 1] ?? PLANETS[0]
 
     return (
+        
         <div className="planet-detail">
             <button className="planet-detail__back" onClick={() => navigate('/')}>
                 ← Retour
             </button>
+
+            {prevPlanet && (
+                <button className="planet-detail__nav planet-detail__nav--prev" onClick={() => navigate(`/planet/${prevPlanet.id}`)}>
+                    ← {prevPlanet.name}
+                </button>
+            )}
+
+            {nextPlanet && (
+                <button className="planet-detail__nav planet-detail__nav--next" onClick={() => navigate(`/planet/${nextPlanet.id}`)}>
+                    {nextPlanet.name} →
+                </button>
+            )}
 
             <div className="planet-detail__layout">
                 <div className="planet-detail__left">
@@ -62,6 +78,7 @@ function PlanetDetails() {
                 </div>
             </div>
         </div>
+        
     )
 }
 
