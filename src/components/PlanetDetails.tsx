@@ -31,17 +31,17 @@ function PlanetDetails() {
                     {nextPlanet.name} →
                 </button>
             )}
-
+            
             <div className="planet-detail__layout">
                 <div className="planet-detail__left">
-                    <div
-                        className="planet-detail__sphere"
-                        style={{ backgroundImage: `url(/solar-system${planet.texture})` }}
-                    />
-                    <div className="planet-detail__coords">
-                        <p>DIST. SOLEIL — {planet.dist}</p>
-                        <p>RÉVOLUTION SOLAIRE — {planet.period}</p>
-                    </div>
+                <div
+                    className={`planet-detail__sphere ${planet.hasRing ? 'planet-detail__sphere--ring' : ''}`}
+                    style={{ backgroundImage: `url(/solar-system${planet.texture})` }}
+                />
+                <div className="planet-detail__coords">
+                    <p>DIST. SOLEIL — {planet.dist}</p>
+                    <p>RÉVOLUTION SOLAIRE — {planet.period}</p>
+                </div>
                 </div>
 
                 <div className="planet-detail__right">

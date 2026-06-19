@@ -24,6 +24,8 @@ function SolarSystem() {
 
   const [hoveredPlanet, setHoveredPlanet] = useState<typeof PLANETS[0] | null>(null)
   const [hoveredPos, setHoveredPos] = useState({ x: 0, y: 0 })
+  const [speedMultiplier, setSpeedMultiplier] = useState(1)
+  const speedRef = useRef(1)
   const mouseRef = useRef({ x: -999, y: -999 })
   const navigate = useNavigate()
 
@@ -96,12 +98,12 @@ function SolarSystem() {
   }
 
   const draw = useCallback(() => {
-        const canvas = canvasRef.current
-        if (!canvas) return
-        const ctx = canvas.getContext("2d")
-        if (!ctx) return
+    const canvas = canvasRef.current
+    if (!canvas) return
+    const ctx = canvas.getContext("2d")
+    if (!ctx) return
 
-        ctx.clearRect(0, 0, WIDTH, HEIGHT)
+    ctx.clearRect(0, 0, WIDTH, HEIGHT)
 
     planetsState.current.forEach((p) => drawOrbit(ctx, p.orbit))
     drawSun(ctx)
@@ -116,7 +118,7 @@ function SolarSystem() {
       const pos = drawPlanet(ctx, planet, isHovered)
       if (isHovered) newPos = pos
 
-      planet.angle += planet.speed * 0.1  //C'EST PARTIT LETS GOOOO
+      planet.angle += planet.speed * 0.1 * speedRef.current
       planet.spinAngle += planet.selfSpin
     })
 
@@ -141,14 +143,15 @@ function SolarSystem() {
   }
 
   function handleMouseLeave() {
-     mouseRef.current = { x: -999, y: -999 }
-     setHoveredPlanet(null)
+    mouseRef.current = { x: -999, y: -999 }
+    setHoveredPlanet(null)
   }
+
   function handleClick() {
-     if (hoveredPlanet) {
-     navigate(`/planet/${hoveredPlanet.id}`)
+    if (hoveredPlanet) {
+      navigate(`/planet/${hoveredPlanet.id}`)
     }
-}
+  }
 
   return (
     <div className="solar-system">
@@ -180,6 +183,31 @@ function SolarSystem() {
             canvasH={HEIGHT}
           />
         )}
+        <div className="solar-system__speed">
+          <span>VITESSE</span>
+          <input
+            type="range"
+            min={0}
+            max={100}
+            step={0.1}
+            value={speedMultiplier}
+            onChange={(e) => {
+              const val = parseFloat(e.target.value)
+              setSpeedMultiplier(val)
+              speedRef.current = val
+            }}
+          />
+            <span>{speedMultiplier.toFixed(1)}x</span>
+              <button
+                className="solar-system__speed-reset"
+                onClick={() => {
+                  setSpeedMultiplier(1)
+                  speedRef.current = 1
+                }}
+              >
+                ↺
+              </button>
+        </div>
       </div>
     </div>
   )

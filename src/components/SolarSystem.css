@@ -27,3 +27,42 @@
   overflow: hidden;
   margin-top: -2rem;
 }
+
+.solar-system__speed {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 12px;
+  letter-spacing: 0.1em;
+}
+
+.solar-system__speed input[type="range"] {
+  width: 120px;
+  accent-color: rgba(255, 255, 255, 0.5);
+}
+
+.solar-system__speed-reset {
+  background: transparent;
+  border: 0.5px solid rgba(255, 255, 255, 0.3);
+  color: rgba(255, 255, 255, 0.5);
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.solar-system__speed-reset:hover {
+  border-color: rgba(255, 255, 255, 0.6);
+  color: #fff;
+}

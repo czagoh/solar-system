@@ -74,17 +74,40 @@
 /* Sphère — inchangée */
 .planet-detail__sphere {
   position: relative;
+  overflow: visible;  /* ← important, sinon l'anneau est coupé */
   width: 300px;
   height: 300px;
   border-radius: 50%;
   background-size: 200%;
   background-position: 0% center;
-  animation: spinTexture 15s linear infinite;
+  animation: spinTexture 8s linear infinite;
   box-shadow: 0 0 80px rgba(255, 255, 255, 0.12);
+}
+
+.planet-detail__sphere--ring::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotateX(80deg);
+  width: 350px;
+  height: 350px;
+  border-radius: 50%;
+  border: 25px solid rgba(210, 190, 120, 0.35);
+box-shadow:
+    0 0 0 8px rgba(180, 160, 100, 0.08),
+    0 0 0 16px rgba(160, 140, 85, 0.20),
+    0 0 0 24px rgba(200, 175, 110, 0.30),
+    0 0 0 32px rgba(170, 148, 90, 0.22),
+    0 0 0 40px rgba(140, 120, 70, 0.12),
+    0 0 0 50px rgba(120, 100, 55, 0.06);
+  pointer-events: none;
+  
 }
 
 .planet-detail__sphere::after {
   content: '';
+  
   position: absolute;
   inset: 0;
   border-radius: 50%;
